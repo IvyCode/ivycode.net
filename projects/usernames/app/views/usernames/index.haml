@@ -19,11 +19,11 @@
             Cancelled Request
         %h3.text-muted
           Minecraft Usernames
-          %i#loading.fa.fa-spinner.fa-spin{:style => "display: none"}
+          %i#loading.fa.fa-refresh.fa-spin{:style => "display: none"}
 
       = form_tag("#", :method => :get) do
         .row
-          .col-lg-3{:rel => "tooltip", :title => "Prepends or appends to all usernames found"}
+          .col-lg-2{:rel => "tooltip", :title => "Prepends or appends to all usernames found"}
             = text_field_tag :q, params[:q], :placeholder => "Contains...", :class => "form-control"
           .col-lg-2{:rel => "tooltip", :title => "Use search as suffix or prefix"}
             .checkbox{:style => "margin-top: 8px;"}
@@ -34,13 +34,16 @@
             = text_field_tag :min, params[:min].presence ? params[:min] : 3, :placeholder => "Min", :class => "form-control"
           .col-lg-1{:style => "padding: 0 5px", :rel => "tooltip", :title => "Maximum number of characters"}
             = text_field_tag :max, params[:max].presence ? params[:max] : 16, :placeholder => "Max", :class => "form-control"
-          .col-lg-2
+          .col-lg-2{:rel => "tooltip", :title => "Dictionary", :style => "width: 130px"}
+            = select_tag :dictionary, options_for_select(["All", "Animals", "Adjectives", "Nouns"]), :class => "form-control"
+          .col-lg-2{:style => "width: 110px"}
             = submit_tag "Search", {:class => "btn btn-primary"}
-          .col-lg-2
-            %a.toggle-saved{:href => "#", :class => "btn btn-large btn-success"}
-              View Saved
+          .col-lg-2.pull-right
+            %a.toggle-saved{:href => "#", :class => "btn btn-large btn-success pull-right"}
+              Saved
               %i.fa.fa-chevron-down
         = hidden_field_tag :s, 1
+        = hidden_field_tag :process, 1, :id => "id"
 
       #saved{:style => "display: none"}
         %hr
@@ -52,6 +55,9 @@
       %br{:style => "clear: both;"}/
       %br/
       .footer
+        %p
+          This website passes through a dictionary of words randomly in search of available Minecraft usernames, sometimes combining and mixing words together. You can prefix or suffix words with anything provided and specify a minimum or maxmium length for the username. It's designed to help you find a username, as it did for me when I came across IvyCode. Enjoy!
+        %p
         %p 
           &copy;
           %a{:href => "http://ivycode.net"} IvyCode
