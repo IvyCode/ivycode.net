@@ -1,0 +1,63 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %title IvyCode &raquo; Projects
+    = csrf_meta_tags
+    %meta{:content => "width=device-width, initial-scale=1, maximum-scale=1", :name => "viewport"}
+      %link{:href => "//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css", :rel => "stylesheet"}
+        %link{:href => "http://fonts.googleapis.com/css?family=Lato:400,700", :rel => "stylesheet", :type => "text/css"}
+          %link{:href => "http://198.27.103.4/assets/css/bootstrap.css", :rel => "stylesheet"}
+            %link{:href => "/assets/custom.css", :rel => "stylesheet"}
+              / SEO
+              %meta{:content => "I am a Ruby, Javascript, Java and PHP developer as a senior in high school. I own the Avicus Network Minecraft server.", :name => "description"}
+                %meta{:charset => "utf-8"}/
+  %body
+    .container
+      .header
+        #cancelled.pull-right{:style => "display: none;"}
+          .alert.alert-danger{:style => "padding: 8px"}
+            Cancelled Request
+        %h3.text-muted
+          Minecraft Usernames
+          %i#loading.fa.fa-spinner.fa-spin{:style => "display: none"}
+
+      = form_tag("#", :method => :get) do
+        .row
+          .col-lg-3{:rel => "tooltip", :title => "Prepends or appends to all usernames found"}
+            = text_field_tag :q, params[:q], :placeholder => "Contains...", :class => "form-control"
+          .col-lg-2{:rel => "tooltip", :title => "Use search as suffix or prefix"}
+            .checkbox{:style => "margin-top: 8px;"}
+              %label
+                = check_box_tag :suffix, 1, params[:suffix].to_i == 1
+                Suffix
+          .col-lg-1{:style => "padding: 0 5px", :rel => "tooltip", :title => "Minimum number of characters"}
+            = text_field_tag :min, params[:min].presence ? params[:min] : 3, :placeholder => "Min", :class => "form-control"
+          .col-lg-1{:style => "padding: 0 5px", :rel => "tooltip", :title => "Maximum number of characters"}
+            = text_field_tag :max, params[:max].presence ? params[:max] : 16, :placeholder => "Max", :class => "form-control"
+          .col-lg-2
+            = submit_tag "Search", {:class => "btn btn-primary"}
+          .col-lg-2
+            %a.toggle-saved{:href => "#", :class => "btn btn-large btn-success"}
+              View Saved
+              %i.fa.fa-chevron-down
+        = hidden_field_tag :s, 1
+
+      #saved{:style => "display: none"}
+        %hr
+        #none.text-center Nothing saved!
+
+      %div{:style => "clear:both;"}
+      #results
+
+      %br{:style => "clear: both;"}/
+      %br/
+      .footer
+        %p 
+          &copy;
+          %a{:href => "http://ivycode.net"} IvyCode
+          2014
+    %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"}
+    %script{:src => "http://198.27.103.4/assets/js/bootstrap.js"}
+    %script{:src => "/assets/cookies.js"}
+    %script{:src => "/assets/custom.js"}
+

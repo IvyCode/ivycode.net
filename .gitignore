@@ -8,7 +8,6 @@ capybara-*.html
 /vendor/bundle
 /log/*
 /tmp/*
-/db/*.sqlite3
 /public/system/*
 /coverage/
 /spec/tmp/*
@@ -17,3 +16,7 @@ rerun.txt
 pickle-email-*.html
 .project
 sftp-config.json
+tmp
+bin
+log
+vendor

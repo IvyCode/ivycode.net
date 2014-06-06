@@ -1,0 +1,10 @@
+%hr
+
+- @available.each do |name, ok|
+	- if ok
+		.username.alert.alert-success
+			= name
+			%a.close.save{"aria-hidden" => true, :style => "font-size: 15px"} &checkmark;
+	- else
+		.username.alert.alert-danger
+			= name
